@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "983589329059",
+    "project_id": "quotology-ce87f",
+    "storage_bucket": "quotology-ce87f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:983589329059:android:3b57f1480d117ba1964716",
+        "android_client_info": {
+          "package_name": "com.etcetera.quotology"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_HmTE52q9M2NpwZJGUtz63wbdWVGhl4s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
