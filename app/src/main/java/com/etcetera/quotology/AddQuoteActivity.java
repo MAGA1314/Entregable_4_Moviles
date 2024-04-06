@@ -4,20 +4,26 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 
 public class AddQuoteActivity extends AppCompatActivity {
 
+    DatabaseReference quotesRef;
     private EditText quoteEditText;
     private EditText authorEditText;
     private Button addButton;
@@ -32,7 +38,31 @@ public class AddQuoteActivity extends AppCompatActivity {
         authorEditText = (EditText) findViewById(R.id.editTextAuthor);
         addButton = (Button) findViewById(R.id.addButton);
 
+
+        TextView mTextViewData = (TextView) findViewById(R.id.dato);
         //listener
+        quotesRef = FirebaseDatabase.getInstance().getReference();
+        quotesRef.child("quotes").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    String author = dataSnapshot.getValue().toString();
+                    mTextViewData.setText("El nombre es:" +author);
+                }
+            });
+                /*for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    Log.e("Datos:", ""+snapshot.getValue());
+                }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        }*/
+
+
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
