@@ -39,7 +39,11 @@ public class AddQuoteActivity extends AppCompatActivity {
         addButton = (Button) findViewById(R.id.addButton);
 
 
-        TextView mTextViewData = (TextView) findViewById(R.id.dato);
+
+
+
+
+        /*
         //listener
         quotesRef = FirebaseDatabase.getInstance().getReference();
         quotesRef.child("quotes").addValueEventListener(new ValueEventListener() {
@@ -50,7 +54,7 @@ public class AddQuoteActivity extends AppCompatActivity {
                     mTextViewData.setText("El nombre es:" +author);
                 }
             });
-                /*for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     Log.e("Datos:", ""+snapshot.getValue());
                 }
 
@@ -109,6 +113,36 @@ public class AddQuoteActivity extends AppCompatActivity {
                 Toast.makeText(AddQuoteActivity.this, "Added", Toast.LENGTH_SHORT).show();
                 quoteEditText.getText().clear();
                 authorEditText.getText().clear();
+            }
+        });
+
+        // Lee datos de la base de datos
+        quotesRef.addValueEventListener(new ValueEventListener() {
+            TextView mTextViewData = (TextView) findViewById(R.id.dato);
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Este método se llama cada vez que los datos cambian
+                if (dataSnapshot.exists()) {
+                    StringBuilder quotesData = new StringBuilder();
+                    for (DataSnapshot quoteSnapshot : dataSnapshot.getChildren()) {
+                        HashMap<String, Object> quoteMap = (HashMap<String, Object>) quoteSnapshot.getValue();
+                        quotesData.append("Cita: ").append(quoteMap.get("quote")).append("\n");
+                        quotesData.append("Autor: ").append(quoteMap.get("author")).append("\n\n");
+                    }
+                    TextView mTextViewData = findViewById(R.id.dato);
+                    mTextViewData.setText(quotesData.toString());
+                } else {
+                    TextView mTextViewData = findViewById(R.id
+                            .dato);
+                    mTextViewData.setText("No hay citas disponibles.");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Este método se llama si ocurre un error al leer los datos
+                TextView mTextViewData = findViewById(R.id.dato);
+                mTextViewData.setText("Error al leer los datos.");
             }
         });
 
