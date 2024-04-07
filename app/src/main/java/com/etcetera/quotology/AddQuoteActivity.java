@@ -2,13 +2,14 @@ package com.etcetera.quotology;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -19,7 +20,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class AddQuoteActivity extends AppCompatActivity {
 
@@ -27,6 +30,9 @@ public class AddQuoteActivity extends AppCompatActivity {
     private EditText quoteEditText;
     private EditText authorEditText;
     private Button addButton;
+    private RecyclerView recyclerView;
+    private QuoteAdapter quoteAdapter;
+    private List<Quote> quotes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,34 +44,16 @@ public class AddQuoteActivity extends AppCompatActivity {
         authorEditText = (EditText) findViewById(R.id.editTextAuthor);
         addButton = (Button) findViewById(R.id.addButton);
 
+        // Initialize RecyclerView
+        recyclerView = findViewById(R.id.recyclerViewQuotes);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        // Initialize the list of quotes
+        quotes = new ArrayList<>();
 
-
-
-
-        /*
-        //listener
-        quotesRef = FirebaseDatabase.getInstance().getReference();
-        quotesRef.child("quotes").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    String author = dataSnapshot.getValue().toString();
-                    mTextViewData.setText("El nombre es:" +author);
-                }
-            });
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    Log.e("Datos:", ""+snapshot.getValue());
-                }
-
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        }*/
-
+        // Initialize the adapter with the empty list
+        quoteAdapter = new QuoteAdapter(quotes);
+        recyclerView.setAdapter(quoteAdapter);
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,10 +76,6 @@ public class AddQuoteActivity extends AppCompatActivity {
                 addQuoteToDB(quote,author);
             }
         });
-
-
-        //create in database
-
     }
 
     private void addQuoteToDB(String quote, String author) {
@@ -116,36 +100,27 @@ public class AddQuoteActivity extends AppCompatActivity {
             }
         });
 
-        // Lee datos de la base de datos
+        // Read data from the database
         quotesRef.addValueEventListener(new ValueEventListener() {
-            TextView mTextViewData = (TextView) findViewById(R.id.dato);
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // Este método se llama cada vez que los datos cambian
+                // This method is called every time the data changes
                 if (dataSnapshot.exists()) {
-                    StringBuilder quotesData = new StringBuilder();
+                    quotes.clear(); // Clear the list before adding new items
                     for (DataSnapshot quoteSnapshot : dataSnapshot.getChildren()) {
                         HashMap<String, Object> quoteMap = (HashMap<String, Object>) quoteSnapshot.getValue();
-                        quotesData.append("Cita: ").append(quoteMap.get("quote")).append("\n");
-                        quotesData.append("Autor: ").append(quoteMap.get("author")).append("\n\n");
+                        quotes.add(new Quote(quoteMap.get("quote").toString(), quoteMap.get("author").toString()));
                     }
-                    TextView mTextViewData = findViewById(R.id.dato);
-                    mTextViewData.setText(quotesData.toString());
+                    quoteAdapter.notifyDataSetChanged(); // Notify the adapter that the data has changed
                 } else {
-                    TextView mTextViewData = findViewById(R.id
-                            .dato);
-                    mTextViewData.setText("No hay citas disponibles.");
+                    // Handle the case where there are no quotes available
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                // Este método se llama si ocurre un error al leer los datos
-                TextView mTextViewData = findViewById(R.id.dato);
-                mTextViewData.setText("Error al leer los datos.");
+                // This method is called if an error occurs while
             }
         });
-        //
-
     }
 }

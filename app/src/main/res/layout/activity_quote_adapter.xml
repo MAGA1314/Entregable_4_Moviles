@@ -8,12 +8,14 @@
       android:id="@+id/quoteTextView"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:text="Quote"
       android:textSize="18sp" />
 
   <TextView
       android:id="@+id/authorTextView"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:textSize="14sp" />
+      android:text="Author"
+      android:textSize="16sp" />
 
 </LinearLayout>

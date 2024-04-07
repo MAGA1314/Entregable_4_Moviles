@@ -13,17 +13,20 @@ public class QuoteAdapter extends RecyclerView.Adapter<QuoteAdapter.QuoteViewHol
 
     private List<Quote> quotes;
 
+    // Constructor que toma la lista de citas
     public QuoteAdapter(List<Quote> quotes) {
         this.quotes = quotes;
     }
 
+    // Crea nuevos ViewHolders
     @NonNull
     @Override
     public QuoteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_quote, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_quote_adapter, parent, false);
         return new QuoteViewHolder(view);
     }
 
+    // Enlaza los datos a los ViewHolders
     @Override
     public void onBindViewHolder(@NonNull QuoteViewHolder holder, int position) {
         Quote quote = quotes.get(position);
@@ -31,14 +34,15 @@ public class QuoteAdapter extends RecyclerView.Adapter<QuoteAdapter.QuoteViewHol
         holder.authorTextView.setText(quote.getAuthor());
     }
 
+    // Devuelve el número total de elementos en la lista
     @Override
     public int getItemCount() {
         return quotes.size();
     }
 
+    // ViewHolder para los elementos de la lista
     public static class QuoteViewHolder extends RecyclerView.ViewHolder {
-        TextView quoteTextView;
-        TextView authorTextView;
+        TextView quoteTextView, authorTextView;
 
         public QuoteViewHolder(@NonNull View itemView) {
             super(itemView);
