@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
     // Asumiendo que tienes un ViewHolder personalizado para tu adaptador
     public static class QuoteViewHolder extends RecyclerView.ViewHolder {
         View mView;

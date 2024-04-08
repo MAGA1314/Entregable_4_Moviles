@@ -98,18 +98,15 @@ public class AddQuoteActivity extends AppCompatActivity {
         String key = quotesRef.push().getKey();
         quoteHashmap.put("key",key);
 
-
         quotesRef.child(key).setValue(quoteHashmap).addOnCompleteListener(new OnCompleteListener<Void>() {
-
-
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 Toast.makeText(AddQuoteActivity.this, "Added", Toast.LENGTH_SHORT).show();
                 quoteEditText.getText().clear();
                 authorEditText.getText().clear();
 
-                // Aquí es donde actualizas la lista de citas en el Singleton
-                QuoteData.getInstance().getQuotes().add(new Quote(quote, author));
+                // Agregar la nueva cita al Singleton
+                QuoteData.getInstance().addQuote(new Quote(quote, author));
             }
         });
 

@@ -1,19 +1,9 @@
 package com.etcetera.quotology;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuoteData extends AppCompatActivity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_quotedata);
-    }
+public class QuoteData {
     private static QuoteData instance;
     private List<Quote> quotes;
 
@@ -32,7 +22,7 @@ public class QuoteData extends AppCompatActivity {
         return quotes;
     }
 
-    public void setQuotes(List<Quote> quotes) {
-        this.quotes = quotes;
+    public void addQuote(Quote quote) {
+        quotes.add(quote);
     }
 }
