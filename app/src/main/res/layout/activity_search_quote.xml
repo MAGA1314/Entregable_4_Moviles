@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddQuoteActivity">
+    tools:context=".SearchQuoteActivity">
 
     <EditText
-        android:id="@+id/editTextQuote"
+        android:id="@+id/searchEditText"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_margin="30dp"
         android:layout_marginBottom="200dp"
-        android:hint="Quote text goes here..."
+        android:hint="¿Que texto deseas buscar?"
         android:inputType="textMultiLine"
         android:maxLength="1000"
         android:gravity="start"
@@ -20,44 +20,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/editTextAuthor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="30dp"
-        android:layout_marginTop="16dp"
-        android:hint="Author"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextQuote" />
-
     <Button
         android:id="@+id/addButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Add"
+        android:layout_marginTop="68dp"
+        android:text="Search"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextAuthor" />
+        app:layout_constraintTop_toBottomOf="@+id/searchEditText" />
 
     <Button
         android:id="@+id/backButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:layout_marginTop="76dp"
         android:text="Volver"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerViewQuotes"
+        app:layout_constraintBottom_toTopOf="@+id/searchRecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.906"
+        app:layout_constraintHorizontal_bias="0.95"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editTextAuthor"
-        app:layout_constraintVertical_bias="0.706" />
+        app:layout_constraintTop_toBottomOf="@+id/searchEditText"
+        app:layout_constraintVertical_bias="0.685" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewQuotes"
+        android:id="@+id/searchRecyclerView"
         android:layout_width="386dp"
         android:layout_height="309dp"
         android:layout_margin="40px"
@@ -67,6 +55,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addButton"
         app:layout_constraintVertical_bias="0.608" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

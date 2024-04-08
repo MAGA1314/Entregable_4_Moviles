@@ -76,6 +76,13 @@ public class AddQuoteActivity extends AppCompatActivity {
                 addQuoteToDB(quote,author);
             }
         });
+        Button backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed(); // Esto llama al método onBackPressed() de la actividad, que por defecto cierra la actividad actual y vuelve a la anterior.
+            }
+        });
     }
 
     private void addQuoteToDB(String quote, String author) {
@@ -91,12 +98,18 @@ public class AddQuoteActivity extends AppCompatActivity {
         String key = quotesRef.push().getKey();
         quoteHashmap.put("key",key);
 
+
         quotesRef.child(key).setValue(quoteHashmap).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 Toast.makeText(AddQuoteActivity.this, "Added", Toast.LENGTH_SHORT).show();
                 quoteEditText.getText().clear();
                 authorEditText.getText().clear();
+
+                // Aquí es donde actualizas la lista de citas en el Singleton
+                QuoteData.getInstance().getQuotes().add(new Quote(quote, author));
             }
         });
 
