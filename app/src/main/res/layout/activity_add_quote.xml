@@ -51,10 +51,10 @@
         android:text="Volver"
         app:layout_constraintBottom_toTopOf="@+id/recyclerViewQuotes"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.906"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.577"
+        app:layout_constraintStart_toEndOf="@+id/addButton"
         app:layout_constraintTop_toTopOf="@+id/editTextAuthor"
-        app:layout_constraintVertical_bias="0.706" />
+        app:layout_constraintVertical_bias="0.782" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewQuotes"
