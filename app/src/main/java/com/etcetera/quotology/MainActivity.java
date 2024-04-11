@@ -6,9 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -21,14 +19,14 @@ public class MainActivity extends AppCompatActivity {
 
     private FloatingActionButton floatingActionButton, searchActionButton;
     private RecyclerView recyclerViewQuotes;
-    private QuoteAdapter quoteAdapter; // Asumiendo que QuoteAdapter es tu adaptador personalizado
+    private QuoteAdapter quoteAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        recyclerViewQuotes = findViewById(R.id.recyclerViewQuotes);
+        recyclerViewQuotes = findViewById(R.id.quotes);
         recyclerViewQuotes.setLayoutManager(new LinearLayoutManager(this));
 
         // Obtener la lista de citas del Singleton
@@ -46,8 +44,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        FloatingActionButton searchQuoteButton = findViewById(R.id.searchQuoteButton);
-        searchQuoteButton.setOnClickListener(new View.OnClickListener() {
+
+        searchActionButton = findViewById(R.id.searchQuoteButton);
+        searchActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, SearchQuoteActivity.class);
@@ -55,8 +54,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-
 
     // Asumiendo que tienes un ViewHolder personalizado para tu adaptador
     public static class QuoteViewHolder extends RecyclerView.ViewHolder {
