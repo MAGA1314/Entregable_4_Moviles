@@ -17,9 +17,15 @@ public class Quote extends AppCompatActivity {
         return quote;
     }
 
+    public void setQuote(String quote) {
+        this.quote = quote;
+    }
     // Método getter para author
     public String getAuthor() {
         return author;
+    }
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     @Override

@@ -6,39 +6,27 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
-import io.reactivex.rxjava3.annotations.NonNull;
-
 public class MainActivity extends AppCompatActivity {
 
-    private FloatingActionButton floatingActionButton, searchActionButton;
-    private RecyclerView recyclerViewQuotes;
-    private QuoteAdapter quoteAdapter; // Asumiendo que QuoteAdapter es tu adaptador personalizado
+    private FloatingActionButton floatingActionButton;
+    private RecyclerView recyclerView;
+    private MiAdapter adapter;
+    private FirebaseHelper firebaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        recyclerViewQuotes = findViewById(R.id.recyclerViewQuotes);
-        recyclerViewQuotes.setLayoutManager(new LinearLayoutManager(this));
-
-        // Obtener la lista de citas del Singleton
-        List<Quote> quotes = QuoteData.getInstance().getQuotes();
-
-        // Inicializar el adaptador con la lista de citas
-        quoteAdapter = new QuoteAdapter(quotes);
-        recyclerViewQuotes.setAdapter(quoteAdapter);
-
-        floatingActionButton = findViewById(R.id.floatingActionButton);
+        floatingActionButton = (FloatingActionButton) findViewById(R.id.floatingActionButton);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,35 +34,18 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        FloatingActionButton searchQuoteButton = findViewById(R.id.searchQuoteButton);
-        searchQuoteButton.setOnClickListener(new View.OnClickListener() {
+
+        recyclerView = findViewById(R.id.quotes);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        firebaseHelper = new FirebaseHelper();
+        firebaseHelper.obtenerDatos(new FirebaseHelper.OnDataReceivedListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SearchQuoteActivity.class);
-                startActivity(intent);
+            public void onDataReceived(List<Quote> datos) {
+                adapter = new MiAdapter(datos);
+                recyclerView.setAdapter(adapter);
             }
         });
-    }
 
-
-
-    // Asumiendo que tienes un ViewHolder personalizado para tu adaptador
-    public static class QuoteViewHolder extends RecyclerView.ViewHolder {
-        View mView;
-
-        public QuoteViewHolder(@NonNull View itemView) {
-            super(itemView);
-            mView = itemView;
-        }
-
-        public void setQuote(String quote) {
-            TextView quoteTextView = mView.findViewById(R.id.quoteTextView);
-            quoteTextView.setText(quote);
-        }
-
-        public void setAuthor(String author) {
-            TextView authorTextView = mView.findViewById(R.id.authorTextView);
-            authorTextView.setText(author);
-        }
     }
 }
