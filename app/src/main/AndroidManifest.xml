@@ -13,9 +13,6 @@
         android:theme="@style/Theme.Quotology"
         tools:targetApi="31">
         <activity
-            android:name=".FirebaseHelper"
-            android:exported="false" />
-        <activity
             android:name=".SearchQuoteActivity"
             android:exported="false" />
         <activity
