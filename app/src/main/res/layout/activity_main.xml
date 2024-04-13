@@ -16,7 +16,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
 <<<<<<< HEAD
+<<<<<<< HEAD
         tools:layout_editor_absoluteX="1dp" />
+=======
+        app:layout_constraintVertical_bias="0.201" />
+>>>>>>> parent of f27ac56 (melo final)
 =======
         app:layout_constraintVertical_bias="0.201" />
 >>>>>>> parent of f27ac56 (melo final)
