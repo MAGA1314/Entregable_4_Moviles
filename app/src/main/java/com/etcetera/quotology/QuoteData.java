@@ -5,10 +5,10 @@ import java.util.List;
 
 public class QuoteData {
     private static QuoteData instance;
-    private List<Quote> quotes;
+    private List<Quote> entregable4;
 
     private QuoteData() {
-        quotes = new ArrayList<>();
+        entregable4 = new ArrayList<>();
     }
 
     public static synchronized QuoteData getInstance() {
@@ -18,11 +18,11 @@ public class QuoteData {
         return instance;
     }
 
-    public List<Quote> getQuotes() {
-        return quotes;
+    public List<Quote> getentregable4() {
+        return entregable4;
     }
 
     public void addQuote(Quote quote) {
-        quotes.add(quote);
+        entregable4.add(quote);
     }
 }

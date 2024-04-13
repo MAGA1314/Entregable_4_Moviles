@@ -31,7 +31,7 @@ public class SearchQuoteActivity extends AppCompatActivity {
     private EditText searchEditText;
     private RecyclerView searchRecyclerView;
     private QuoteAdapter quoteAdapter;
-    private List<Quote> quotes;
+    private List<Quote> entregable4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +42,8 @@ public class SearchQuoteActivity extends AppCompatActivity {
         searchRecyclerView = findViewById(R.id.searchRecyclerView);
         searchRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        quotes = new ArrayList<>();
-        quoteAdapter = new QuoteAdapter(quotes);
+        entregable4 = new ArrayList<>();
+        quoteAdapter = new QuoteAdapter(entregable4);
         searchRecyclerView.setAdapter(quoteAdapter);
 
 
@@ -58,7 +58,7 @@ public class SearchQuoteActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                searchQuotes(s.toString());
+                searchentregable4(s.toString());
             }
         });
         Button backButton = findViewById(R.id.backButton);
@@ -70,13 +70,13 @@ public class SearchQuoteActivity extends AppCompatActivity {
         });
     }
 
-    private void searchQuotes(String query) {
+    private void searchentregable4(String query) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference quotesRef = database.getReference("quotes");
+        DatabaseReference entregable4Ref = database.getReference("entregable4");
 
         // Realiza las consultas tanto para 'quote' como para 'author'
-        Query quoteQuery = quotesRef.orderByChild("quote").startAt(query).endAt(query + "\uf8ff");
-        Query authorQuery = quotesRef.orderByChild("author").startAt(query).endAt(query + "\uf8ff");
+        Query quoteQuery = entregable4Ref.orderByChild("quote").startAt(query).endAt(query + "\uf8ff");
+        Query authorQuery = entregable4Ref.orderByChild("author").startAt(query).endAt(query + "\uf8ff");
 
         // Inicializa una lista para almacenar los resultados combinados
         final List<Quote> combinedResults = new ArrayList<>();
@@ -85,8 +85,8 @@ public class SearchQuoteActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 List<Quote> quoteResults = new ArrayList<>();
-                for (DataSnapshot quoteSnapshot : dataSnapshot.getChildren()) {
-                    HashMap<String, Object> quoteMap = (HashMap<String, Object>) quoteSnapshot.getValue();
+                for (DataSnapshot entregable4napshot : dataSnapshot.getChildren()) {
+                    HashMap<String, Object> quoteMap = (HashMap<String, Object>) entregable4napshot.getValue();
                     quoteResults.add(new Quote(quoteMap.get("quote").toString(), quoteMap.get("author").toString()));
                 }
                 // Agrega los resultados de la consulta por 'quote' a la lista combinada
@@ -127,8 +127,8 @@ public class SearchQuoteActivity extends AppCompatActivity {
     }
 
     private void displaySearchResults(List<Quote> results) {
-        quotes.clear(); // Limpiar la lista actual de citas
-        quotes.addAll(results); // Agregar los resultados combinados
+        entregable4.clear(); // Limpiar la lista actual de citas
+        entregable4.addAll(results); // Agregar los resultados combinados
         quoteAdapter.notifyDataSetChanged(); // Notificar al adaptador del cambio en los datos
     }
 

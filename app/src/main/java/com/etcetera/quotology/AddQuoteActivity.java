@@ -26,13 +26,13 @@ import java.util.List;
 
 public class AddQuoteActivity extends AppCompatActivity {
 
-    DatabaseReference quotesRef;
+    DatabaseReference entregable4Ref;
     private EditText quoteEditText;
     private EditText authorEditText;
     private Button addButton;
     private RecyclerView recyclerView;
     private QuoteAdapter quoteAdapter;
-    private List<Quote> quotes;
+    private List<Quote> entregable4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,14 +45,14 @@ public class AddQuoteActivity extends AppCompatActivity {
         addButton = (Button) findViewById(R.id.addButton);
 
         // Initialize RecyclerView
-        recyclerView = findViewById(R.id.recyclerViewQuotes);
+        recyclerView = findViewById(R.id.recyclerViewentregable4);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // Initialize the list of quotes
-        quotes = new ArrayList<>();
+        // Initialize the list of entregable4
+        entregable4 = new ArrayList<>();
 
         // Initialize the adapter with the empty list
-        quoteAdapter = new QuoteAdapter(quotes);
+        quoteAdapter = new QuoteAdapter(entregable4);
         recyclerView.setAdapter(quoteAdapter);
 
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -93,12 +93,12 @@ public class AddQuoteActivity extends AppCompatActivity {
 
         //instantiate database connection
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference quotesRef = database.getReference("quotes");
+        DatabaseReference entregable4Ref = database.getReference("entregable4");
 
-        String key = quotesRef.push().getKey();
+        String key = entregable4Ref.push().getKey();
         quoteHashmap.put("key",key);
 
-        quotesRef.child(key).setValue(quoteHashmap).addOnCompleteListener(new OnCompleteListener<Void>() {
+        entregable4Ref.child(key).setValue(quoteHashmap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 Toast.makeText(AddQuoteActivity.this, "Added", Toast.LENGTH_SHORT).show();
@@ -111,19 +111,19 @@ public class AddQuoteActivity extends AppCompatActivity {
         });
 
         // Read data from the database
-        quotesRef.addValueEventListener(new ValueEventListener() {
+        entregable4Ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called every time the data changes
                 if (dataSnapshot.exists()) {
-                    quotes.clear(); // Clear the list before adding new items
-                    for (DataSnapshot quoteSnapshot : dataSnapshot.getChildren()) {
-                        HashMap<String, Object> quoteMap = (HashMap<String, Object>) quoteSnapshot.getValue();
-                        quotes.add(new Quote(quoteMap.get("quote").toString(), quoteMap.get("author").toString()));
+                    entregable4.clear(); // Clear the list before adding new items
+                    for (DataSnapshot entregable4napshot : dataSnapshot.getChildren()) {
+                        HashMap<String, Object> quoteMap = (HashMap<String, Object>) entregable4napshot.getValue();
+                        entregable4.add(new Quote(quoteMap.get("quote").toString(), quoteMap.get("author").toString()));
                     }
                     quoteAdapter.notifyDataSetChanged(); // Notify the adapter that the data has changed
                 } else {
-                    // Handle the case where there are no quotes available
+                    // Handle the case where there are no entregable4 available
                 }
             }
 

@@ -11,11 +11,11 @@ import java.util.List;
 
 public class QuoteAdapter extends RecyclerView.Adapter<QuoteAdapter.QuoteViewHolder> {
 
-    private List<Quote> quotes;
+    private List<Quote> entregable4;
 
     // Constructor que toma la lista de citas
-    public QuoteAdapter(List<Quote> quotes) {
-        this.quotes = quotes;
+    public QuoteAdapter(List<Quote> entregable4) {
+        this.entregable4 = entregable4;
     }
 
     // Crea nuevos ViewHolders
@@ -29,7 +29,7 @@ public class QuoteAdapter extends RecyclerView.Adapter<QuoteAdapter.QuoteViewHol
     // Enlaza los datos a los ViewHolders
     @Override
     public void onBindViewHolder(@NonNull QuoteViewHolder holder, int position) {
-        Quote quote = quotes.get(position);
+        Quote quote = entregable4.get(position);
         holder.quoteTextView.setText(quote.getQuote());
         holder.authorTextView.setText(quote.getAuthor());
     }
@@ -37,7 +37,7 @@ public class QuoteAdapter extends RecyclerView.Adapter<QuoteAdapter.QuoteViewHol
     // Devuelve el número total de elementos en la lista
     @Override
     public int getItemCount() {
-        return quotes.size();
+        return entregable4.size();
     }
 
     // ViewHolder para los elementos de la lista

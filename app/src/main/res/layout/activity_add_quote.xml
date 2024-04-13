@@ -49,7 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:text="Volver"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerViewQuotes"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerViewentregable4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.577"
         app:layout_constraintStart_toEndOf="@+id/addButton"
@@ -57,7 +57,7 @@
         app:layout_constraintVertical_bias="0.782" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewQuotes"
+        android:id="@+id/recyclerViewentregable4"
         android:layout_width="386dp"
         android:layout_height="309dp"
         android:layout_margin="40px"

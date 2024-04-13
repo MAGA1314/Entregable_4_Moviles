@@ -20,7 +20,7 @@ import io.reactivex.rxjava3.annotations.NonNull;
 public class MainActivity extends AppCompatActivity {
 
     private FloatingActionButton floatingActionButton, searchActionButton;
-    private RecyclerView recyclerViewQuotes;
+    private RecyclerView recyclerViewentregable4;
     private QuoteAdapter quoteAdapter; // Asumiendo que QuoteAdapter es tu adaptador personalizado
 
     @Override
@@ -28,15 +28,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //recyclerViewQuotes = findViewById(R.id.recyclerViewQuotes);
-        //recyclerViewQuotes.setLayoutManager(new LinearLayoutManager(this));
+        //recyclerViewentregable4 = findViewById(R.id.recyclerViewentregable4);
+        //recyclerViewentregable4.setLayoutManager(new LinearLayoutManager(this));
 
         // Obtener la lista de citas del Singleton
-        List<Quote> quotes = QuoteData.getInstance().getQuotes();
+        List<Quote> entregable4 = QuoteData.getInstance().getentregable4();
 
         // Inicializar el adaptador con la lista de citas
-        //quoteAdapter = new QuoteAdapter(quotes);
-        //recyclerViewQuotes.setAdapter(quoteAdapter);
+        //quoteAdapter = new QuoteAdapter(entregable4);
+        //recyclerViewentregable4.setAdapter(quoteAdapter);
 
         floatingActionButton = findViewById(R.id.floatingActionButton);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
