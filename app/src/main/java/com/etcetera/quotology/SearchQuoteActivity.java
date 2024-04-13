@@ -78,6 +78,9 @@ public class SearchQuoteActivity extends AppCompatActivity {
         Query quoteQuery = quotesRef.orderByChild("quote").startAt(query).endAt(query + "\uf8ff");
         Query authorQuery = quotesRef.orderByChild("author").startAt(query).endAt(query + "\uf8ff");
 
+        // Inicializa una lista para almacenar los resultados combinados
+        final List<Quote> combinedResults = new ArrayList<>();
+
         ValueEventListener quoteListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -86,7 +89,10 @@ public class SearchQuoteActivity extends AppCompatActivity {
                     HashMap<String, Object> quoteMap = (HashMap<String, Object>) quoteSnapshot.getValue();
                     quoteResults.add(new Quote(quoteMap.get("quote").toString(), quoteMap.get("author").toString()));
                 }
-                displaySearchResults(quoteResults);
+                // Agrega los resultados de la consulta por 'quote' a la lista combinada
+                combinedResults.addAll(quoteResults);
+                // Combina y muestra los resultados
+                displaySearchResults(combinedResults);
             }
 
             @Override
@@ -103,7 +109,10 @@ public class SearchQuoteActivity extends AppCompatActivity {
                     HashMap<String, Object> authorMap = (HashMap<String, Object>) authorSnapshot.getValue();
                     authorResults.add(new Quote(authorMap.get("quote").toString(), authorMap.get("author").toString()));
                 }
-                displaySearchResults(authorResults);
+                // Agrega los resultados de la consulta por 'author' a la lista combinada
+                combinedResults.addAll(authorResults);
+                // Combina y muestra los resultados
+                displaySearchResults(combinedResults);
             }
 
             @Override
@@ -119,7 +128,8 @@ public class SearchQuoteActivity extends AppCompatActivity {
 
     private void displaySearchResults(List<Quote> results) {
         quotes.clear(); // Limpiar la lista actual de citas
-        quotes.addAll(results); // Agregar los resultados de la búsqueda
+        quotes.addAll(results); // Agregar los resultados combinados
         quoteAdapter.notifyDataSetChanged(); // Notificar al adaptador del cambio en los datos
     }
+
 }

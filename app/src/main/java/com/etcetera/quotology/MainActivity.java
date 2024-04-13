@@ -28,15 +28,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        recyclerViewQuotes = findViewById(R.id.recyclerViewQuotes);
-        recyclerViewQuotes.setLayoutManager(new LinearLayoutManager(this));
+        //recyclerViewQuotes = findViewById(R.id.recyclerViewQuotes);
+        //recyclerViewQuotes.setLayoutManager(new LinearLayoutManager(this));
 
         // Obtener la lista de citas del Singleton
         List<Quote> quotes = QuoteData.getInstance().getQuotes();
 
         // Inicializar el adaptador con la lista de citas
-        quoteAdapter = new QuoteAdapter(quotes);
-        recyclerViewQuotes.setAdapter(quoteAdapter);
+        //quoteAdapter = new QuoteAdapter(quotes);
+        //recyclerViewQuotes.setAdapter(quoteAdapter);
 
         floatingActionButton = findViewById(R.id.floatingActionButton);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
